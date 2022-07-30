@@ -20,6 +20,11 @@ class DetailsActivity : AppCompatActivity(), ViewDetailsContract {
         setUI()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.onAttach()
+    }
+
     private fun setUI() {
         val count = intent.getIntExtra(TOTAL_COUNT_EXTRA, 0)
         presenter.setCounter(count)
@@ -35,6 +40,11 @@ class DetailsActivity : AppCompatActivity(), ViewDetailsContract {
     private fun setCountText(count: Int) {
         totalCountTextView.text =
             String.format(Locale.getDefault(), getString(R.string.results_count), count)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.onDetach()
     }
 
     companion object {

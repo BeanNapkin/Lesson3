@@ -3,6 +3,7 @@ package com.geekbrains.tests.view.search
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,9 +30,15 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         setUI()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.onAttach()
+    }
+
     private fun setUI() {
         toDetailsActivityButton.setOnClickListener {
             startActivity(DetailsActivity.getIntent(this, totalCount))
+//            presenter.searchGitHub(findViewById<EditText>(R.id.searchEditText).text.toString())
         }
         setQueryListener()
         setRecyclerView()
@@ -95,6 +102,11 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         } else {
             progressBar.visibility = View.GONE
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.onDetach()
     }
 
     companion object {

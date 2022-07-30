@@ -24,6 +24,13 @@ internal class SearchPresenter internal constructor(
         repository.searchGithub(searchQuery, this)
     }
 
+    override fun onAttach() {
+        viewContract.displayLoading(false)
+    }
+
+    override fun onDetach() {
+    }
+
     override fun handleGitHubResponse(response: Response<SearchResponse?>?) {
         viewContract.displayLoading(false)
         if (response != null && response.isSuccessful) {

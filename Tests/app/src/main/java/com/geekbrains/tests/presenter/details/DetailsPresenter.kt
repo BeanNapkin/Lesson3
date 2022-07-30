@@ -20,4 +20,10 @@ internal class DetailsPresenter internal constructor(
         count--
         viewContract.setCount(count)
     }
+
+    override fun onAttach() {
+    }
+
+    override fun onDetach() {
+    }
 }
